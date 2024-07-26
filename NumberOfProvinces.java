@@ -1,3 +1,5 @@
+//connected is an adjacency matrix with 1 saying that there is a connection
+// we need to basically find the number of connected components
 class NumberOfProvinces {
     public void dfs(int node, int[][] isConnected, boolean[] visit) {
         visit[node] = true;
