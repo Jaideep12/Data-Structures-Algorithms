@@ -1,5 +1,6 @@
 //This works only for DAG
 //Idea is to first store data in adjacency list and then go node by node by keeping every node in a stack
+//basically if there is an edge u->v then u must always come before v in the final output
 class TopoSort
 {
     //Function to return list containing vertices in Topological order. 
