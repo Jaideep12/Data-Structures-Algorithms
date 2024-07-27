@@ -2,7 +2,8 @@ class CycleDetectionBFS {
     // Function to detect cycle in an undirected graph.
     public boolean isCycle(int V, ArrayList<ArrayList<Integer>> adj) {
         boolean visited [] = new boolean[V];
-    
+
+        //we need to run a loop and consider all vertices because it can be a graph with connected components, this will be a case in a lot of graph problems.
         for(int i=0;i<V;i++){
             if(!visited[i]){
                if(bfs(V,adj,visited,i)){
