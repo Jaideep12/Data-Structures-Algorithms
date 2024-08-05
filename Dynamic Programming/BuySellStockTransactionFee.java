@@ -7,36 +7,32 @@
 // You may not engage in multiple transactions simultaneously (i.e., you must sell the stock before you buy again).
 // The transaction fee is only charged once for each stock purchase and sale.
 
-//Note - this is not a space optimized solution hence will fail for space constraints
-
 class Solution {
     public int maxProfit(int[] prices, int fee) {
         int n = prices.length;
-        int [][][] dp = new int[n][2][fee+1];
+        int [][] dp = new int[n][2];
 
-        for(int i=0;i<n;i++){
-            for(int j=0;j<2;j++){
-                Arrays.fill(dp[i][j],-1);
-            }
+        for(int a[] : dp){
+            Arrays.fill(a,-1);
         }
 
         return helper(prices,0,1,fee,dp);
     }
 
-    public int helper(int [] prices, int ind, int buy, int fee, int [][][]dp){
+    public int helper(int [] prices, int ind, int buy, int fee, int [][]dp){
         if(ind == prices.length){
             return 0;
         }
 
-        if(dp[ind][buy][fee]!=-1) return dp[ind][buy][fee];
+        if(dp[ind][buy]!=-1) return dp[ind][buy];
 
         if(buy==1){
-            dp[ind][buy][fee] = Math.max(-prices[ind] + helper(prices,ind+1,0,fee,dp)
+            dp[ind][buy] = Math.max(-prices[ind] + helper(prices,ind+1,0,fee,dp)
             ,helper(prices,ind+1,1,fee,dp));
         }else{
-            dp[ind][buy][fee] = Math.max((prices[ind] - fee) + helper(prices,ind+1,1,fee,dp)
+            dp[ind][buy] = Math.max((prices[ind] - fee) + helper(prices,ind+1,1,fee,dp)
             ,helper(prices,ind+1,0,fee,dp));
         }
-        return dp[ind][buy][fee];
+        return dp[ind][buy];
     }
 }
