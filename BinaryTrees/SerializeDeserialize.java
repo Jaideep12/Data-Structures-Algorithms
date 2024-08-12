@@ -21,6 +21,7 @@ public class Codec {
                 q.offer(curNode.right);
             }
         }
+        System.out.println(sb.toString());
         return sb.toString();
     }
 
@@ -30,33 +31,28 @@ public class Codec {
             return null;
         }
 
-        StringBuilder s = new StringBuilder(data);
+        String arr[] = data.split(",");
+        int x=0;
 
-        int commaIndex = s.indexOf(",");
-        String str = s.substring(0, commaIndex);
-        s.delete(0, commaIndex + 1);
-        TreeNode root = new TreeNode(Integer.parseInt(str));
+        String str = "";
+        TreeNode root = new TreeNode(Integer.parseInt(arr[x++]));
 
         Queue<TreeNode> q = new LinkedList<>();
         // Start with the root node
         q.offer(root);
 
-        while (!q.isEmpty()) {
+        while (!q.isEmpty() && x<data.length()) {
             // Get the front node in the queue
             TreeNode node = q.poll();
 
-            commaIndex = s.indexOf(",");
-            str = s.substring(0, commaIndex);
-            s.delete(0, commaIndex + 1);
+            str = arr[x++];
             if (!str.equals("#")) {
                 TreeNode leftNode = new TreeNode(Integer.parseInt(str));
                 node.left = leftNode;
                 q.offer(leftNode);
             }
-
-            commaIndex = s.indexOf(",");
-            str = s.substring(0, commaIndex);
-            s.delete(0, commaIndex + 1);
+            
+            str=arr[x++];
             if (!str.equals("#")) {
                 TreeNode rightNode = new TreeNode(Integer.parseInt(str));
                 node.right = rightNode;
